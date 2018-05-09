@@ -1,0 +1,18 @@
+.group{
+	display: inline-block;
+}
+.hide{
+	display: none;
+}
+.show{
+	display: block;
+}
+.form{
+	width: 200px;
+}
+
+#login {
+	margin: auto;
+	text-align: center;
+	width: 40%;
+}
