@@ -7,7 +7,7 @@ You would require MongoDB on your system to run this project. Follow [instructio
 To install this project on your system, clone the repository and install dependencies
 
 ```bash
-$ git clone https://github.com/krishnachaithanyatelakapalli/contacts.github
+$ git clone https://github.com/krishnachaithanyatelakapalli/contacts.git
 $ cd contacts
 $ npm install
 ```

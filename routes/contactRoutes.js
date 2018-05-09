@@ -4,6 +4,7 @@ var express = require('express'),
 
 var Contact	= require('../models/contact');
 var defaultImage = 'https://www.hassanlab.eu/sites/default/files/2016-02/blank_person_51.png';
+var requireLogin = require('../middleware/requireLogin');
 
 // INDEX - Landing Page
 router.get('/', function(req, res){
@@ -22,7 +23,7 @@ router.get('/contacts', function(req, res){
 });
 
 // SHOW - Show individual based on 'name'
-router.get('/contacts/name/:tag', function(req, res){
+router.get('/contacts/name/:tag', requireLogin, function(req, res){
 	Contact.find({name: new RegExp(req.params.tag,'i')}, function(err, contacts){
 		if(err){
 			console.log(err);
@@ -34,7 +35,7 @@ router.get('/contacts/name/:tag', function(req, res){
 });
 
 // SHOW - Show individual based on '_id'
-router.get('/contacts/:id/id', function(req, res){
+router.get('/contacts/:id/id', requireLogin, function(req, res){
 	Contact.findById(req.params.id, function(err, contact){
 		if(err){
 			console.log(err);
@@ -46,7 +47,7 @@ router.get('/contacts/:id/id', function(req, res){
 });
 
 //CREATE - Create new
-router.post('/contacts/add_new', function(req, res){
+router.post('/contacts/add_new', requireLogin, function(req, res){
 	var newContact = {
 		name: req.body.contact.name,
 		image: defaultImage,
@@ -66,7 +67,7 @@ router.post('/contacts/add_new', function(req, res){
 });
 
 // EDIT - Edit an existing contact
-router.put('/contacts/:id/edit', function(req, res){
+router.put('/contacts/:id/edit', requireLogin, function(req, res){
 	var newContact = {
 		name: req.body.name,
 		contact:{
@@ -85,7 +86,7 @@ router.put('/contacts/:id/edit', function(req, res){
 });
 
 // DELETE - Delete a contact
-router.delete('/contacts/:id/delete', function(req, res){
+router.delete('/contacts/:id/delete', requireLogin, function(req, res){
 	Contact.findByIdAndRemove(req.params.id, function(err){
 		if(err){
 			console.log(err);
